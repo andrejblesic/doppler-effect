@@ -103,13 +103,14 @@ circles.push(new Circle(x, canvasHeight/2, 0));
 
 function draw() {
   ctx.strokeStyle = "#000000";
+  ctx.fillStyle = '#000000';
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   drawGrid();
   ctx.moveTo(0, canvasHeight/2);
-  ctx.setLineDash([5, 5]);
   ctx.lineTo(canvasWidth, canvasHeight/2);
   ctx.setLineDash([]);
   ctx.stroke();
+  ctx.beginPath();
   circles.forEach(circle => {
     circle.setRadius(circle.radius + speedOfSound);
     ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
@@ -117,6 +118,7 @@ function draw() {
     ctx.beginPath();
   });
   ctx.strokeStyle = "#FF0000";
+  ctx.fillStyle = '#000000';
   ctx.arc(x, canvasHeight/2, 5, 0, 2 * Math.PI);
   ctx.stroke();
   ctx.fillStyle = '#ff0000';
@@ -153,6 +155,7 @@ function stopSimulation() {
 
 function reset() {
   ctx.strokeStyle = "#000000";
+  ctx.fillStyle = '#000000';
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   circles = [];
   x = 300;
