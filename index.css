@@ -1,0 +1,98 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 25px;
+}
+
+canvas {
+  border: 1px solid black;
+  display: block;
+}
+
+input {
+  margin-top: 40px;
+  font-size: 20px;
+  height: 40px;
+}
+
+label {
+  font-size: 24px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.ruler {
+  width: 1500px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  left: -16px;
+  /* transform: scaleX(0.9); */
+}
+
+.ruler span {
+  position: absolute;
+}
+
+.ruler span:nth-child(1) {
+  left: 0;
+}
+
+.ruler span:nth-child(2) {
+  left: 100px;
+}
+
+.ruler span:nth-child(3) {
+  left: 200px;
+}
+
+.ruler span:nth-child(4) {
+  left: 300px;
+}
+
+.ruler span:nth-child(5) {
+  left: 400px;
+}
+
+.ruler span:nth-child(6) {
+  left: 500px;
+}
+
+.ruler span:nth-child(7) {
+  left: 600px;
+}
+
+.ruler span:nth-child(8) {
+  left: 700px;
+}
+
+.ruler span:nth-child(9) {
+  left: 800px;
+}
+
+.ruler span:nth-child(10) {
+  left: 900px;
+}
+
+.ruler span:nth-child(11) {
+  left: 1000px;
+}
+
+.ruler span:nth-child(12) {
+  left: 1100px;
+}
+
+.ruler span:nth-child(13) {
+  left: 1200px;
+}
+
+.ruler span:nth-child(14) {
+  left: 1300px;
+}
+
+.ruler span:nth-child(15) {
+  left: 1400px;
+}
+
+.ruler span:nth-child(16) {
+  left: 1500px;
+}
