@@ -12,8 +12,12 @@
   <canvas id="canvas"></canvas>
   <div class="control-panel">
     <div>
-      <input value="200" id="speed-input" type="number">
-    <label for="speed-input">m/s</label>
+      <input placeholder="Starting velocity" value="200" id="speed-input" type="number">
+      <label for="speed-input">m/s</label>
+      <input placeholder="Acceleration rate" id="acceleration-input" type="number">
+      <label for="acceleration-input">%</label>
+      <input value="0" placeholder="Starting X position" id="starting-position" type="number">
+      <label for="starting-position">m</label>
     </div>
     <div class="controls">
       <button id="start">START</button>
@@ -25,55 +29,8 @@
     <p>(SPEED OF SOUND IS 343 m/s)</p>
     <p><span id="seconds">0</span> seconds elapsed</p>
   </div>
-  <div class="ruler">
-    <span class="ruler-mark">
-      -3000m
-    </span>
-    <span class="ruler-mark">
-      -2000m
-    </span>
-    <span class="ruler-mark">
-      -1000m
-    </span>
-    <span class="ruler-mark">
-      0m
-    </span>
-    <span class="ruler-mark">
-      1000m
-    </span>
-    <span class="ruler-mark">
-      2000m
-    </span>
-    <span class="ruler-mark">
-      3000m
-    </span>
-    <span class="ruler-mark">
-      4000m
-    </span>
-    <span class="ruler-mark">
-      5000m
-    </span>
-    <span class="ruler-mark">
-      6000m
-    </span>
-    <span class="ruler-mark">
-      7000m
-    </span>
-    <span class="ruler-mark">
-      8000m
-    </span>
-    <span class="ruler-mark">
-      9000m
-    </span>
-    <span class="ruler-mark">
-      10000m
-    </span>
-    <span class="ruler-mark">
-      11000m
-    </span>
-    <span class="ruler-mark">
-      12000m
-    </span>
+  <div id="ruler" class="ruler">
+
   </div>
 </body>
 </html>

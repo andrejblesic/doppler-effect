@@ -1,11 +1,16 @@
-const canvasWidth = 1500;
-const canvasHeight = 800;
+const canvasWidth = 1600;
+const canvasHeight = 900;
 const interval = 50;
 let scaleFactor = 10000 / interval;
 let counter = 0;
 let tickRate = 250;
 let secondCounter = 0;
-let zoomedIn = false;
+let zoomedIn;
+let accelerationRate = 0;
+let acceleration = 0;
+let startingPos = 100;
+
+const ruler = document.getElementById('ruler');
 
 const c = document.getElementById("canvas");
 const ctx = c.getContext("2d");
@@ -19,6 +24,9 @@ const zoomInBtn = document.getElementById('zoom-in');
 const zoomOutBtn = document.getElementById('zoom-out');
 const startBtn = document.getElementById('start');
 const allSpans = document.getElementsByClassName('ruler-mark');
+const speedInput = document.getElementById('speed-input');
+const accelerationInput = document.getElementById('acceleration-input');
+const startingPosInput = document.getElementById('starting-position');
 
 class Circle {
   constructor(x, y, radius) {
@@ -35,7 +43,7 @@ class Circle {
 }
 
 let circleRadius = 0;
-let x = 300;
+let x = startingPos;
 let objSpeed = 200 / scaleFactor;
 let speedOfSound = 343 / scaleFactor;
 
@@ -48,50 +56,89 @@ function drawLine(x) {
 }
 
 function drawGrid() {
-  for (let i = 1; i < 16; i++) {
+  for (let i = 1; i < canvasWidth / 10; i++) {
     drawLine(i*100);
   }
 }
 
 drawGrid();
 
-document.getElementById('speed-input').addEventListener('input', e => {
+const currentRuler = document.getElementsByClassName('ruler-mark');
+
+function drawRuler() {
+  ruler.innerHTML = '';
+  for (let i = 0; i <= canvasWidth / 100; i++) {
+    const rulerMark = document.createElement('SPAN');
+    rulerMark.style.left = `${i*100}px`;
+    rulerMark.classList.add('ruler-mark');
+    rulerMark.innerHTML = `${(i - 100/(zoomedIn ? 1000 : 100))*1000}m`;
+    ruler.append(rulerMark);
+  }
+}
+
+drawRuler();
+
+speedInput.addEventListener('input', e => {
   objSpeed = Number(e.target.value) / scaleFactor;
+});
+
+accelerationInput.addEventListener('input', e => {
+  if (zoomedIn) {
+    accelerationRate = Number(e.target.value) / 100;
+  } else {
+    accelerationRate = Number(e.target.value) / 1000;
+  }
+});
+
+startingPosInput.addEventListener('input', e => {
+  if (zoomedIn) {
+    startingPos = Number(e.target.value);
+  } else {
+    startingPos = (Number(e.target.value) / 10);
+  }
+  x = startingPos + 100;
 });
 
 startBtn.addEventListener('click', e => {
   e.target.setAttribute('disabled', true);
   stopBtn.removeAttribute('disabled');
- resetBtn.setAttribute('disabled', true);
+  resetBtn.setAttribute('disabled', true);
+  startingPosInput.setAttribute('disabled', true);
   startSimulation();
 });
 
 stopBtn.addEventListener('click', e => {
   e.target.setAttribute('disabled', true);
   startBtn.removeAttribute('disabled');
- resetBtn.removeAttribute('disabled');
+  resetBtn.removeAttribute('disabled');
+  startingPosInput.removeAttribute('disabled');
   stopSimulation();
 });
 
 zoomInBtn.addEventListener('click', e => {
-  reset();
+  zoomedIn = true;
+  startingPos = Number(startingPosInput.value) + 100;
+  x = startingPos;
+  // reset();
   e.target.setAttribute('disabled', true);
   zoomOutBtn.removeAttribute('disabled');
-  zoomedIn = true;
   scaleFactor = 1000 / interval;
-  objSpeed = 200 / scaleFactor;
+  objSpeed = Number(speedInput.value) / scaleFactor;
   speedOfSound = 343 / scaleFactor;
   for (span of allSpans) {
+    console.log(span.innerHTML, parseInt(span.innerHTML));
     span.innerHTML = parseInt(span.innerHTML) / 10 + 'm';
   }
 });
 
 zoomOutBtn.addEventListener('click', e => {
-  reset();
+  zoomedIn = false;
+  startingPos = Number(startingPosInput.value) + 100;
+  x = startingPos;
   e.target.setAttribute('disabled', true);
   zoomInBtn.removeAttribute('disabled');
   scaleFactor = 10000 / interval;
-  objSpeed = 200 / scaleFactor;
+  objSpeed = Number(speedInput.value) / scaleFactor;
   speedOfSound = 343 / scaleFactor;
   for (span of allSpans) {
     span.innerHTML = parseInt(span.innerHTML) * 10 + 'm';
@@ -104,15 +151,18 @@ resetBtn.addEventListener('click', () => {
 
 let circles = [];
 
-circles.push(new Circle(x, canvasHeight/2, 0));
+// circles.push(new Circle(x, canvasHeight/2, 0));
 
 function draw() {
+  acceleration += accelerationRate;
+  x += objSpeed + acceleration;
   ctx.strokeStyle = "#000000";
   ctx.fillStyle = '#000000';
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   drawGrid();
-  ctx.moveTo(0, canvasHeight/2);
-  ctx.lineTo(canvasWidth, canvasHeight/2);
+  console.log('WTF', startingPos);
+  ctx.moveTo(startingPos, canvasHeight/2);
+  ctx.lineTo(x, canvasHeight/2);
   ctx.setLineDash([]);
   ctx.stroke();
   ctx.beginPath();
@@ -129,7 +179,6 @@ function draw() {
   ctx.fillStyle = '#ff0000';
   ctx.fill();
   ctx.beginPath();
-  x+=objSpeed;
   counter++;
 }
 
@@ -159,13 +208,26 @@ function stopSimulation() {
 }
 
 function reset() {
+  // window.location.href =  window.location.href;
+  // zoomInBtn.removeAttribute('disabled');
+  zoomOutBtn.click();
+  // zoomedIn = false;
   ctx.strokeStyle = "#000000";
   ctx.fillStyle = '#000000';
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  circles = [];
-  x = 300;
-  secondCounter = 0;
-  counter = 0;
-  drawGrid();
+  startingPosInput.value = 0;
+  speedInput.value = 200;
+  accelerationInput.value = 0;
   displaySecondsElapsed.innerHTML = '0';
+  drawGrid();
+  drawRuler();
+  drawLine();
+  circles = [];
+  scaleFactor = 10000 / interval;
+  counter = 0;
+  secondCounter = 0;
+  accelerationRate = 0;
+  acceleration = 0;
+  startingPos = 100;
+  x = startingPos;
 }
