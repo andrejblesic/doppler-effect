@@ -12,6 +12,14 @@ const ctx = c.getContext("2d");
 ctx.canvas.width = canvasWidth;
 ctx.canvas.height = canvasHeight;
 
+const displaySecondsElapsed = document.getElementById('seconds');
+const stopBtn = document.getElementById('stop');
+const resetBtn =  document.getElementById('reset');
+const zoomInBtn = document.getElementById('zoom-in');
+const zoomOutBtn = document.getElementById('zoom-out');
+const startBtn = document.getElementById('start');
+const allSpans = document.getElementsByClassName('ruler-mark');
+
 class Circle {
   constructor(x, y, radius) {
     this.x = x;
@@ -26,6 +34,11 @@ class Circle {
   }
 }
 
+let circleRadius = 0;
+let x = 300;
+let objSpeed = 200 / scaleFactor;
+let speedOfSound = 343 / scaleFactor;
+
 function drawLine(x) {
   ctx.beginPath();
   ctx.setLineDash([5, 15]);
@@ -33,7 +46,6 @@ function drawLine(x) {
   ctx.lineTo(x, canvasHeight);
   ctx.stroke();
 }
-
 
 function drawGrid() {
   for (let i = 1; i < 16; i++) {
@@ -43,36 +55,30 @@ function drawGrid() {
 
 drawGrid();
 
-let circleRadius = 0;
-let x = 300;
-let objSpeed = 200 / scaleFactor;
-let speedOfSound = 343 / scaleFactor;
-
 document.getElementById('speed-input').addEventListener('input', e => {
   objSpeed = Number(e.target.value) / scaleFactor;
 });
 
-document.getElementById('start').addEventListener('click', e => {
+startBtn.addEventListener('click', e => {
   e.target.setAttribute('disabled', true);
-  document.getElementById('stop').removeAttribute('disabled');
-  document.getElementById('reset').setAttribute('disabled', true);
+  stopBtn.removeAttribute('disabled');
+ resetBtn.setAttribute('disabled', true);
   startSimulation();
 });
 
-document.getElementById('stop').addEventListener('click', e => {
+stopBtn.addEventListener('click', e => {
   e.target.setAttribute('disabled', true);
-  document.getElementById('start').removeAttribute('disabled');
-  document.getElementById('reset').removeAttribute('disabled');
+  startBtn.removeAttribute('disabled');
+ resetBtn.removeAttribute('disabled');
   stopSimulation();
 });
 
-document.getElementById('zoom-in').addEventListener('click', e => {
+zoomInBtn.addEventListener('click', e => {
   reset();
   e.target.setAttribute('disabled', true);
-  document.getElementById('zoom-out').removeAttribute('disabled');
+  zoomOutBtn.removeAttribute('disabled');
   zoomedIn = true;
   scaleFactor = 1000 / interval;
-  let allSpans = document.getElementsByTagName('SPAN');
   objSpeed = 200 / scaleFactor;
   speedOfSound = 343 / scaleFactor;
   for (span of allSpans) {
@@ -80,12 +86,11 @@ document.getElementById('zoom-in').addEventListener('click', e => {
   }
 });
 
-document.getElementById('zoom-out').addEventListener('click', e => {
+zoomOutBtn.addEventListener('click', e => {
   reset();
   e.target.setAttribute('disabled', true);
-  document.getElementById('zoom-in').removeAttribute('disabled');
+  zoomInBtn.removeAttribute('disabled');
   scaleFactor = 10000 / interval;
-  let allSpans = document.getElementsByTagName('SPAN');
   objSpeed = 200 / scaleFactor;
   speedOfSound = 343 / scaleFactor;
   for (span of allSpans) {
@@ -93,7 +98,7 @@ document.getElementById('zoom-out').addEventListener('click', e => {
   }
 });
 
-document.getElementById('reset').addEventListener('click', () => {
+resetBtn.addEventListener('click', () => {
   reset();
 });
 
@@ -143,7 +148,7 @@ function startSimulation() {
 
   counterInterval = setInterval(() => {
     secondCounter+=0.05;
-    document.getElementById('seconds').innerHTML = secondCounter.toFixed(2);
+    displaySecondsElapsed.innerHTML = secondCounter.toFixed(2);
   }, 50)
 }
 
@@ -162,4 +167,5 @@ function reset() {
   secondCounter = 0;
   counter = 0;
   drawGrid();
+  displaySecondsElapsed.innerHTML = '0';
 }

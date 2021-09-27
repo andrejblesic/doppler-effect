@@ -10,64 +10,70 @@
 </head>
 <body>
   <canvas id="canvas"></canvas>
+  <div class="control-panel">
+    <div>
+      <input value="200" id="speed-input" type="number">
+    <label for="speed-input">m/s</label>
+    </div>
+    <div class="controls">
+      <button id="start">START</button>
+      <button id="zoom-in">ZOOM IN</button>
+      <button disabled id="zoom-out">ZOOM OUT</button>
+      <button disabled id="stop">STOP</button>
+      <button disabled id="reset">RESET</button>
+    </div>
+    <p>(SPEED OF SOUND IS 343 m/s)</p>
+    <p><span id="seconds">0</span> seconds elapsed</p>
+  </div>
   <div class="ruler">
-    <span>
+    <span class="ruler-mark">
       -3000m
     </span>
-    <span>
+    <span class="ruler-mark">
       -2000m
     </span>
-    <span>
+    <span class="ruler-mark">
       -1000m
     </span>
-    <span>
+    <span class="ruler-mark">
       0m
     </span>
-    <span>
+    <span class="ruler-mark">
       1000m
     </span>
-    <span>
+    <span class="ruler-mark">
       2000m
     </span>
-    <span>
+    <span class="ruler-mark">
       3000m
     </span>
-    <span>
+    <span class="ruler-mark">
       4000m
     </span>
-    <span>
+    <span class="ruler-mark">
       5000m
     </span>
-    <span>
+    <span class="ruler-mark">
       6000m
     </span>
-    <span>
+    <span class="ruler-mark">
       7000m
     </span>
-    <span>
+    <span class="ruler-mark">
       8000m
     </span>
-    <span>
+    <span class="ruler-mark">
       9000m
     </span>
-    <span>
+    <span class="ruler-mark">
       10000m
     </span>
-    <span>
+    <span class="ruler-mark">
       11000m
     </span>
-    <span>
+    <span class="ruler-mark">
       12000m
     </span>
   </div>
-  <input value="200" id="speed-input" type="number">
-  <label for="speed-input">m/s</label>
-  <button id="start">START</button>
-  <button id="zoom-in">ZOOM IN</button>
-  <button disabled id="zoom-out">ZOOM OUT</button>
-  <button disabled id="stop">STOP</button>
-  <button disabled id="reset">RESET</button>
-  <p>(SPEED OF SOUND IS 343 m/s)</p>
-  <p id="seconds">0</p> seconds elapsed
 </body>
 </html>

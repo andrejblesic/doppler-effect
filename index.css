@@ -5,11 +5,10 @@ body {
 
 canvas {
   border: 1px solid black;
-  display: block;
+  display: inline-block;
 }
 
 input {
-  margin-top: 40px;
   font-size: 20px;
   height: 40px;
 }
@@ -20,6 +19,16 @@ label {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 300px;
+}
+
+.controls button {
+  margin: 5px;
+}
+
 .ruler {
   width: 1500px;
   display: flex;
@@ -27,6 +36,12 @@ label {
   position: relative;
   left: -16px;
   /* transform: scaleX(0.9); */
+}
+
+.control-panel {
+  padding-left: 10px;
+  display: inline-block;
+  position: absolute;
 }
 
 .ruler span {
