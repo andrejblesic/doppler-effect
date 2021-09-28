@@ -1,9 +1,9 @@
-const canvasWidth = 2100;
-const canvasHeight = 900;
+const canvasWidth = 1500;
+const canvasHeight = 700;
 const interval = 50;
 let scaleFactor = 10000 / interval;
 let counter = 0;
-let tickRate = 300;
+let tickRate = 292;
 let secondCounter = 0;
 let zoomedIn;
 let accelerationRate = 0;
