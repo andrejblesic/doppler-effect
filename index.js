@@ -92,11 +92,11 @@ accelerationInput.addEventListener('input', e => {
 
 startingPosInput.addEventListener('input', e => {
   if (zoomedIn) {
-    startingPos = Number(e.target.value);
+    startingPos = Number(e.target.value) + 100;
   } else {
-    startingPos = (Number(e.target.value) / 10);
+    startingPos = (Number(e.target.value) / 10) + 100;
   }
-  x = startingPos + 100;
+  x = startingPos;
 });
 
 startBtn.addEventListener('click', e => {
@@ -126,7 +126,6 @@ zoomInBtn.addEventListener('click', e => {
   objSpeed = Number(speedInput.value) / scaleFactor;
   speedOfSound = 343 / scaleFactor;
   for (span of allSpans) {
-    console.log(span.innerHTML, parseInt(span.innerHTML));
     span.innerHTML = parseInt(span.innerHTML) / 10 + 'm';
   }
 });
@@ -151,8 +150,6 @@ resetBtn.addEventListener('click', () => {
 
 let circles = [];
 
-// circles.push(new Circle(x, canvasHeight/2, 0));
-
 function draw() {
   acceleration += accelerationRate;
   x += objSpeed + acceleration;
@@ -160,7 +157,6 @@ function draw() {
   ctx.fillStyle = '#000000';
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   drawGrid();
-  console.log('WTF', startingPos);
   ctx.moveTo(startingPos, canvasHeight/2);
   ctx.lineTo(x, canvasHeight/2);
   ctx.setLineDash([]);
@@ -230,4 +226,5 @@ function reset() {
   acceleration = 0;
   startingPos = 100;
   x = startingPos;
+  objSpeed = 200 / scaleFactor;
 }
