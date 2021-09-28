@@ -1,9 +1,9 @@
-const canvasWidth = 1600;
+const canvasWidth = 2100;
 const canvasHeight = 900;
 const interval = 50;
 let scaleFactor = 10000 / interval;
 let counter = 0;
-let tickRate = 250;
+let tickRate = 300;
 let secondCounter = 0;
 let zoomedIn;
 let accelerationRate = 0;
@@ -29,10 +29,11 @@ const accelerationInput = document.getElementById('acceleration-input');
 const startingPosInput = document.getElementById('starting-position');
 
 class Circle {
-  constructor(x, y, radius) {
+  constructor(x, y, radius, color) {
     this.x = x;
     this.y = y;
     this.radius = radius;
+    this.color = color;
   }
   setX(x) {
     this.x = x;
@@ -163,19 +164,24 @@ function draw() {
   ctx.stroke();
   ctx.beginPath();
   circles.forEach(circle => {
+    ctx.beginPath();
+    ctx.strokeStyle = circle.color;
+    if (circle.color === 'red') {
+      ctx.lineWidth = 2;
+    } else {
+      ctx.lineWidth = 1;
+    }
     circle.setRadius(circle.radius + speedOfSound);
     ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
     ctx.stroke();
-    ctx.beginPath();
   });
-  ctx.strokeStyle = "#FF0000";
-  ctx.fillStyle = '#000000';
+  ctx.beginPath();
+  ctx.strokeStyle = "#0000FF"; // object color
+  ctx.fillStyle = '#0000FF'; // object color
   ctx.arc(x, canvasHeight/2, 5, 0, 2 * Math.PI);
   ctx.stroke();
-  ctx.fillStyle = '#ff0000';
   ctx.fill();
   ctx.beginPath();
-  counter++;
 }
 
 let drawInterval;
@@ -184,7 +190,8 @@ let counterInterval;
 
 function startSimulation() {
   circleInterval = setInterval(() => {
-    circles.push(new Circle(x, canvasHeight/2, 0));
+    counter++;
+    circles.push(new Circle(x, canvasHeight/2, 0, Math.floor(counter) % 10 === 0 ? 'red' : 'black'));
   }, tickRate);
   
   drawInterval = setInterval(() => {
