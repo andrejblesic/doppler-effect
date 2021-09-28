@@ -8,25 +8,57 @@ canvas {
   display: inline-block;
 }
 
-input {
+button {
+  background-color: rgb(146, 146, 199);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#reset {
+  background: tomato;
+}
+
+input:not([type=checkbox]) {
   font-size: 20px;
   height: 40px;
   margin-bottom: 10px;
+  width: calc(100% - 55px);
 }
 
-label {
-  font-size: 24px;
+input[type="range"] {
+  display: block;
+  width: calc(100% - 55px);
+}
+
+.units {
+  position: absolute;
+  right: 75px;
+  margin-top: -45px;
+  font-size: 20px;
   font-weight: 600;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .controls {
+  width: calc(100% - 55px);
   display: flex;
   flex-wrap: wrap;
   max-width: 300px;
+  /* margin-top: 40px; */
 }
 
 .controls button {
+  flex: 1;
+  white-space: nowrap;
   margin: 5px;
 }
 
@@ -49,7 +81,7 @@ label {
   position: absolute;
 }
 
-.ruler span:nth-child(1) {
+/* .ruler span:nth-child(1) {
   left: 0;
 }
 
@@ -115,4 +147,4 @@ label {
 
 .ruler span:nth-child(17) {
   left: 1600px;
-}
+} */

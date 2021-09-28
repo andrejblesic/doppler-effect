@@ -13,21 +13,27 @@
   <div class="control-panel">
     <div>
       <input placeholder="Starting velocity" value="200" id="speed-input" type="number">
-      <label for="speed-input">m/s</label>
+      <p class='units'>m/s</p>
       <input placeholder="Acceleration rate" id="acceleration-input" type="number">
-      <label for="acceleration-input">%</label>
+      <p class='units'>%</p>
       <input value="0" placeholder="Starting X position" id="starting-position" type="number">
-      <label for="starting-position">m</label>
+      <p class='units'>m</p>
     </div>
+    <p>Line width</p>
+    <input value="1" min="1" max="5" id="line-width" type="range">
     <div class="controls">
       <button id="start">START</button>
+      <button disabled id="stop">STOP</button>
       <button id="zoom-in">ZOOM IN</button>
       <button disabled id="zoom-out">ZOOM OUT</button>
-      <button disabled id="stop">STOP</button>
       <button disabled id="reset">RESET</button>
     </div>
-    <p>(SPEED OF SOUND IS 343 m/s)</p>
-    <p><span id="seconds">0</span> seconds elapsed</p>
+    <input id="fun-mode" type="checkbox">
+    <label for="fun-mode">Fun mode</label>
+    <p>Seconds elapsed: <span id="seconds">0</span></p>
+    <p>Distance from starting point: <span id="x-coord">0</span>m</p>
+    <!-- <p>(SPEED OF SOUND IS 343 m/s)</p>
+    <p>scale: <span id="scale-display">1</span>px = 1m</p> -->
   </div>
   <div id="ruler" class="ruler">
 
