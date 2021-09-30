@@ -9,6 +9,7 @@ canvas {
 }
 
 button {
+  transition: all 250ms;
   background-color: rgb(146, 146, 199);
   color: #fff;
   font-weight: 600;
@@ -16,6 +17,11 @@ button {
   border: none;
   outline: none;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(111, 111, 151);
 }
 
 button:disabled {
@@ -24,7 +30,12 @@ button:disabled {
 }
 
 #reset {
+  transition: all 250ms;
   background: tomato;
+}
+
+#reset:hover {
+  background: rgb(189, 73, 52);
 }
 
 input:not([type=checkbox]) {
