@@ -202,17 +202,7 @@ lineWidth.addEventListener('input', e => {
     ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * pi);
     ctx.stroke();
   });
-<<<<<<< HEAD
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = "#0000FF"; // object color
-  ctx.fillStyle = '#0000FF'; // object color
-  ctx.beginPath();
-  ctx.arc(x, canvasHeight/2, 5, 0, 2 * pi);
-  // ctx.stroke();
-  ctx.fill();
-=======
   drawObject();
->>>>>>> a25a438cf5dc82afc767aec8a51668354ef47026
   ctx.strokeStyle = "#000";
 });
 
@@ -251,21 +241,8 @@ function draw() {
     ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * pi);
     ctx.stroke();
   });
-<<<<<<< HEAD
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.strokeStyle = "#0000FF"; // object color
-  ctx.fillStyle = '#0000FF'; // object color
-  ctx.arc(x, canvasHeight/2, 5, 0, 2 * pi);
-  ctx.stroke();
-  ctx.fill();
-  xCoordDisplay.innerHTML = zoomedIn ? 
-    ((x/10 - scaleFactor/2) * 10).toFixed(2) :
-    ((x - scaleFactor/2) * 10).toFixed(2)
-=======
   drawObject();
   xCoordDisplay.innerHTML = !zoomedIn ? ((x - scaleFactor/2) * 10).toFixed(2) : ((((x - scaleFactor/2) * 10).toFixed(2) - 900) / 10).toFixed(2);
->>>>>>> a25a438cf5dc82afc767aec8a51668354ef47026
 }
 
 // intervals to be redefined on scale change
@@ -324,11 +301,7 @@ function stopSimulation() {
 // reset to initial state
 function reset() {
   zoomOutBtn.click();
-<<<<<<< HEAD
-  // zoomedIn = false;
-=======
   zoomedIn = false;
->>>>>>> a25a438cf5dc82afc767aec8a51668354ef47026
   ctx.strokeStyle = "#000000";
   ctx.fillStyle = '#000000';
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -342,9 +315,6 @@ function reset() {
   acceleration = 0;
   startingPos = 100;
   x = startingPos;
-<<<<<<< HEAD
-=======
   drawGrid();
   drawObject();
->>>>>>> a25a438cf5dc82afc767aec8a51668354ef47026
 }
