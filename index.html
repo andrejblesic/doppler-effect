@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +9,12 @@
   <link rel="stylesheet" href="./index.css">
   <title>Document</title>
 </head>
+
 <body>
   <canvas id="canvas"></canvas>
   <div class="control-panel">
     <div>
-      <input placeholder="Starting velocity" value="200" id="speed-input" type="number">
+      <input placeholder="Velocity" value="200" id="speed-input" type="number">
       <p class='units'>m/s</p>
       <input placeholder="Acceleration rate" id="acceleration-input" type="number">
       <p class='units'>%</p>
@@ -33,10 +35,10 @@
     <p>Seconds elapsed: <span id="seconds">0</span></p>
     <p>Distance from starting point: <span id="x-coord">0</span>m</p>
     <!-- <p>(SPEED OF SOUND IS 343 m/s)</p>
-    <p>scale: <span id="scale-display">1</span>px = 1m</p> -->
   </div>
   <div id="ruler" class="ruler">
 
   </div>
 </body>
+
 </html>

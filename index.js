@@ -4,6 +4,7 @@ const windowHeight = window.innerHeight;
 const canvasWidth = Math.floor(windowWidth / 100) * 100 - 300;
 const canvasHeight = Math.floor(windowHeight / 100) * 100 - 100;
 const interval = 48;
+const pi = Math.PI;
 let tickRate = 300;
 let scaleFactor = 10000 / interval;
 let speedOfSound = 343 / scaleFactor;
@@ -182,14 +183,14 @@ lineWidth.addEventListener('input', e => {
     ctx.beginPath();
     ctx.strokeStyle = circle.color;
     ctx.lineWidth = strokeLineWidth;
-    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * pi);
     ctx.stroke();
   });
   ctx.lineWidth = 1;
   ctx.strokeStyle = "#0000FF"; // object color
   ctx.fillStyle = '#0000FF'; // object color
   ctx.beginPath();
-  ctx.arc(x, canvasHeight/2, 5, 0, 2 * Math.PI);
+  ctx.arc(x, canvasHeight/2, 5, 0, 2 * pi);
   // ctx.stroke();
   ctx.fill();
   ctx.strokeStyle = "#000";
@@ -226,23 +227,20 @@ function draw() {
     ctx.beginPath();
     ctx.strokeStyle = circle.color;
     ctx.lineWidth = strokeLineWidth;
-    // if (circle.color === 'red') {
-    // } else {
-    //   ctx.lineWidth = 1;
-    // }
     circle.setRadius(circle.radius + speedOfSound);
-    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * pi);
     ctx.stroke();
   });
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.strokeStyle = "#0000FF"; // object color
   ctx.fillStyle = '#0000FF'; // object color
-  ctx.arc(x, canvasHeight/2, 5, 0, 2 * Math.PI);
+  ctx.arc(x, canvasHeight/2, 5, 0, 2 * pi);
   ctx.stroke();
   ctx.fill();
-  // ctx.beginPath();
-  xCoordDisplay.innerHTML = !zoomedIn ? ((x - scaleFactor/2) * 10).toFixed(2) : ((((x - scaleFactor/2) * 10).toFixed(2) - 900) / 10).toFixed(2);
+  xCoordDisplay.innerHTML = zoomedIn ? 
+    ((x/10 - scaleFactor/2) * 10).toFixed(2) :
+    ((x - scaleFactor/2) * 10).toFixed(2)
 }
 
 // intervals to be redefined on scale change
@@ -301,14 +299,10 @@ function stopSimulation() {
 // reset to initial state
 function reset() {
   zoomOutBtn.click();
-  // scaleDisplay.innerHTML = '1';
-  zoomedIn = false;
+  // zoomedIn = false;
   ctx.strokeStyle = "#000000";
   ctx.fillStyle = '#000000';
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  // startingPosInput.value = 0;
-  // speedInput.value = 200;
-  // accelerationInput.value = 0;
   displaySecondsElapsed.innerHTML = '0';
   xCoordDisplay.innerHTML = '0';
   drawGrid();
@@ -320,5 +314,4 @@ function reset() {
   acceleration = 0;
   startingPos = 100;
   x = startingPos;
-  // objSpeed = 200 / scaleFactor;
 }
