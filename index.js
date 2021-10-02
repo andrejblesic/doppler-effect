@@ -2,7 +2,7 @@
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
 const canvasWidth = Math.floor(windowWidth / 100) * 100 - 300;
-const canvasHeight = Math.floor(windowHeight / 100) * 100 - 100;
+const canvasHeight = Math.floor(windowHeight / 100) * 100 - 50;
 const interval = 48;
 const pi = Math.PI;
 let tickRate = 300;
@@ -18,8 +18,8 @@ let strokeLineWidth = 1;
 let funMode = false;
 
 //elements
-const ruler = document.getElementById('ruler');
 const displaySecondsElapsed = document.getElementById('seconds');
+const ruler = document.getElementById('ruler');
 const stopBtn = document.getElementById('stop');
 const resetBtn =  document.getElementById('reset');
 const zoomInBtn = document.getElementById('zoom-in');
@@ -76,6 +76,19 @@ function drawGrid() {
 
 drawGrid();
 
+// draw the moving object dot onto the canvas
+function drawObject() {
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "#0000FF"; // object color
+  ctx.fillStyle = '#0000FF'; // object color
+  ctx.beginPath();
+  ctx.arc(x, canvasHeight/2, 5, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.strokeStyle = "#000";
+}
+
+drawObject();
+
 // draw legend at bottom of canvas for given canvas width
 (function drawRuler() {
   ruler.innerHTML = '';
@@ -108,6 +121,9 @@ startingPosInput.addEventListener('input', e => {
     startingPos = (Number(e.target.value) / 10) + 100;
   }
   x = startingPos;
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  drawGrid();
+  drawObject();
 });
 
 startBtn.addEventListener('click', e => {
@@ -186,6 +202,7 @@ lineWidth.addEventListener('input', e => {
     ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * pi);
     ctx.stroke();
   });
+<<<<<<< HEAD
   ctx.lineWidth = 1;
   ctx.strokeStyle = "#0000FF"; // object color
   ctx.fillStyle = '#0000FF'; // object color
@@ -193,6 +210,9 @@ lineWidth.addEventListener('input', e => {
   ctx.arc(x, canvasHeight/2, 5, 0, 2 * pi);
   // ctx.stroke();
   ctx.fill();
+=======
+  drawObject();
+>>>>>>> a25a438cf5dc82afc767aec8a51668354ef47026
   ctx.strokeStyle = "#000";
 });
 
@@ -231,6 +251,7 @@ function draw() {
     ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * pi);
     ctx.stroke();
   });
+<<<<<<< HEAD
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.strokeStyle = "#0000FF"; // object color
@@ -241,6 +262,10 @@ function draw() {
   xCoordDisplay.innerHTML = zoomedIn ? 
     ((x/10 - scaleFactor/2) * 10).toFixed(2) :
     ((x - scaleFactor/2) * 10).toFixed(2)
+=======
+  drawObject();
+  xCoordDisplay.innerHTML = !zoomedIn ? ((x - scaleFactor/2) * 10).toFixed(2) : ((((x - scaleFactor/2) * 10).toFixed(2) - 900) / 10).toFixed(2);
+>>>>>>> a25a438cf5dc82afc767aec8a51668354ef47026
 }
 
 // intervals to be redefined on scale change
@@ -272,7 +297,7 @@ function startSimulation() {
       0,
       funMode ? colorArray[Math.floor(Math.random() * colorArray.length)] : '#000'
     ));
-    if (tickCounter > 200) {
+    if (tickCounter > 250) {
       circles.shift();
     }
   }, tickRate);
@@ -299,19 +324,27 @@ function stopSimulation() {
 // reset to initial state
 function reset() {
   zoomOutBtn.click();
+<<<<<<< HEAD
   // zoomedIn = false;
+=======
+  zoomedIn = false;
+>>>>>>> a25a438cf5dc82afc767aec8a51668354ef47026
   ctx.strokeStyle = "#000000";
   ctx.fillStyle = '#000000';
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   displaySecondsElapsed.innerHTML = '0';
   xCoordDisplay.innerHTML = '0';
-  drawGrid();
   circles = [];
   scaleFactor = 10000 / interval;
   tickCounter = 0;
   secondCounter = 0;
-  accelerationRate = 0;
+  // accelerationRate = 0;
   acceleration = 0;
   startingPos = 100;
   x = startingPos;
+<<<<<<< HEAD
+=======
+  drawGrid();
+  drawObject();
+>>>>>>> a25a438cf5dc82afc767aec8a51668354ef47026
 }
